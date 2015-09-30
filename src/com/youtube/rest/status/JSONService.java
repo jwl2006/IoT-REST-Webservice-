@@ -14,7 +14,7 @@ import org.codehaus.jettison.json.JSONObject;
 	public class JSONService  {
 	
 	
-//	private static MongoDB myMongo = new MongoDB();
+	private static MongoDB myMongo = new MongoDB();
 	
 		
 	private	static Resource client1 = new Resource();
@@ -48,7 +48,7 @@ import org.codehaus.jettison.json.JSONObject;
 		  
 	}	
 	
-//add comment
+
 
 	@POST
 	@Path("/post")
@@ -59,7 +59,7 @@ import org.codehaus.jettison.json.JSONObject;
         	System.out.println("ID is : "+obj.optString("ID"));
 			
         	if (obj.optString("ID").equals("client1")){
-	//			myMongo.insertObject(obj);
+				myMongo.insertObject(obj);
 	            client1.setID(obj.optString("ID"));
 	            client1.setValue(obj.optString("VALUE")); 
 			    System.out.println("server track: " + client1.getID()+ client1.getValue());    
