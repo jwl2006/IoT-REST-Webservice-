@@ -2,6 +2,7 @@
 package com.youtube.rest.status;
 
 import javax.ws.rs.*;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
