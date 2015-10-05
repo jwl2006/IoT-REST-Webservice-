@@ -49,8 +49,7 @@ public class MongoDB {
 
     public String findObject (String param,String name)
     {
-    	System.out.println("IN FIND OBJECT");
-    	System.out.println(name+"***");
+    	
     	BasicDBObject searchQuery = new BasicDBObject();
     	searchQuery.put(param, name);
 
@@ -67,17 +66,18 @@ public class MongoDB {
     	return ret;
     	}
   
-    public void updateObject(String newValue)
+    public void updateObject(String newValue) throws JSONException
     {
-        try{
-    	String oldobj = findObject("ID",newValue);
+    	 
+        
+    	 String oldobj = findObject("ID",newValue);
+    	
          this.deleteObject("ID",newValue);
          JSONObject jobj = new JSONObject(oldobj);
-         jobj.put("Lifetime", 10000);
+         jobj.put("Lifetime", 86400);
+       
          this.insertObject(jobj);
-         }  catch(JSONException e1) {
-      	   
-         }
+        
     }
     
     public void deleteObject(String param, String value)

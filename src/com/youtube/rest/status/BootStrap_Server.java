@@ -29,7 +29,7 @@ public class BootStrap_Server {
              {
            try{ 
             String id = client_id;
-            System.out.println("HERE IN THE BOOTINFO");
+         
             if (id.equals("client1")){  
             	System.out.println(id);
             	String result =strapMongo.findObject("ID","client1");

@@ -21,11 +21,11 @@ public class Registration_Server {
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response register(String track) throws JSONException {
-		System.out.println("IN REGISTER FUNCTION");
+		
         JSONObject obj = new JSONObject(track);
 		registerMongo.insertObject(obj);
 	
-		String result = "Registration saved: "+ track;
+		String result = "Regis Info saved in Server DB: "+ track;
 		return Response.status(201).entity(result).build();	
 	}
     
@@ -36,7 +36,7 @@ public class Registration_Server {
 	public Response update(String track) throws JSONException {
 		
 			
-			registerMongo.updateObject(track);
+			 registerMongo.updateObject(track);
 			
 			String result = "Registration updated: "+ track;
 			return Response.status(201).entity(result).build();	
@@ -46,8 +46,7 @@ public class Registration_Server {
 	@Path("/deregister")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deregister(String track) throws JSONException {
-		System.out.println("IN DEREGISTER FUNCTION");
-      
+	
 		registerMongo.deleteObject("ID",track);
 	
 		String result = "Registration deleted: "+ track;
