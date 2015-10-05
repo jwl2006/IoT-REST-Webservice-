@@ -32,13 +32,13 @@ public class BootStrap_Server {
             System.out.println("HERE IN THE BOOTINFO");
             if (id.equals("client1")){  
             	System.out.println(id);
-            	String result =strapMongo.findObject("client1");
+            	String result =strapMongo.findObject("ID","client1");
             	System.out.println(result);
                 JSONObject jobj = new JSONObject(result);
                 return jobj;
             }
             else if (id.equals("client2")){ 
-            	String result =strapMongo.findObject("client2");
+            	String result =strapMongo.findObject("ID","client2");
                 JSONObject jobj = new JSONObject(result);
                 return jobj;
             }

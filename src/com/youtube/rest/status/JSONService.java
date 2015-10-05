@@ -32,7 +32,7 @@ import org.codehaus.jettison.json.JSONObject;
 		if (id.equals("client1")){
 			System.out.println("In Client1 Service");
 			
-	        String result = myMongo.findObject(id);
+	        String result = myMongo.findObject("ID",id);
 	        JSONObject jobj = new JSONObject();
 	        jobj.put("ID", id);
 	        jobj.put("VALUE", result);

@@ -3,6 +3,10 @@ package com.youtube.rest.status;
 
 import java.net.UnknownHostException;
 
+
+
+
+import org.codehaus.jettison.json.JSONException;
 //import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -10,7 +14,9 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.util.JSON;
 
 
 
@@ -35,18 +41,18 @@ public class MongoDB {
     
     public void insertObject(JSONObject obj)
     {
-    	BasicDBObject document = new BasicDBObject();
-		document.put("ID", obj.optString("ID"));
-		document.put("VALUE",obj.optString("VALUE"));
-		table.insert(document);
+    	
+    	String ret =obj.toString();
+    	DBObject dbobject = (DBObject) JSON.parse(ret);
+		table.insert(dbobject);
     }
 
-    public String findObject (String name)
+    public String findObject (String param,String name)
     {
     	System.out.println("IN FIND OBJECT");
     	System.out.println(name+"***");
     	BasicDBObject searchQuery = new BasicDBObject();
-    	searchQuery.put("ID", name);
+    	searchQuery.put(param, name);
 
         StringBuilder result=new StringBuilder();
     
@@ -60,7 +66,30 @@ public class MongoDB {
     	System.out.println(ret);
     	return ret;
     	}
-    	
+  
+    public void updateObject(String newValue)
+    {
+        try{
+    	String oldobj = findObject("ID",newValue);
+         this.deleteObject("ID",newValue);
+         JSONObject jobj = new JSONObject(oldobj);
+         jobj.put("Lifetime", 10000);
+         this.insertObject(jobj);
+         }  catch(JSONException e1) {
+      	   
+         }
+    }
+    
+    public void deleteObject(String param, String value)
+    {
+    	BasicDBObject document = new BasicDBObject();
+    	document.put(param, value);
+    	table.remove(document); 	
+    }
+    
+    
+    
+    
     
 
 }
