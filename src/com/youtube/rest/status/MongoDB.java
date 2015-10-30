@@ -41,8 +41,9 @@ public class MongoDB {
     
     public void insertObject(JSONObject obj)
     {
-    	
+    	System.out.println("In the Insert Object");
     	String ret =obj.toString();
+    	System.out.println("&&&"+ret);
     	DBObject dbobject = (DBObject) JSON.parse(ret);
 		table.insert(dbobject);
     }
@@ -52,31 +53,36 @@ public class MongoDB {
     	
     	BasicDBObject searchQuery = new BasicDBObject();
     	searchQuery.put(param, name);
+    	System.out.println("$"+searchQuery.toString());
 
         StringBuilder result=new StringBuilder();
     
     	DBCursor cursor = table.find(searchQuery);
 
     	while (cursor.hasNext()) {
+    	//	System.out.println("&"+cursor.next());
     		result.append(cursor.next());
     	}
 
     	String ret = result.toString();
-    	System.out.println(ret);
+  //  	System.out.println(ret);
     	return ret;
     	}
   
     public void updateObject(String newValue) throws JSONException
     {
     	 
-        
-    	 String oldobj = findObject("ID",newValue);
-    	
-         this.deleteObject("ID",newValue);
+   //      System.out.println(newValue);
+    	 String oldobj = findObject("Object-Instance-1",newValue);
+    	System.out.println("***OLD OBJECT"+oldobj);
+         this.deleteObject("Object-Instance-1",newValue);
          JSONObject jobj = new JSONObject(oldobj);
-         jobj.put("Lifetime", 86400);
+         jobj.put("Serial-Num-2", "000-01");
+         jobj.put("Update-Time", "000-00000");
+  //       jobj.put("$oid", "56306a4a4b284sdsc46508c285");
        
          this.insertObject(jobj);
+         
         
     }
     
